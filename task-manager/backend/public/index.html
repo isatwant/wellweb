@@ -64,6 +64,18 @@
         display: grid;
         gap: 10px;
       }
+      .task.priority-low {
+        border-left: 4px solid #10b981;
+        background: linear-gradient(to right, rgba(16, 185, 129, 0.05), transparent);
+      }
+      .task.priority-medium {
+        border-left: 4px solid #f59e0b;
+        background: linear-gradient(to right, rgba(245, 158, 11, 0.05), transparent);
+      }
+      .task.priority-high {
+        border-left: 4px solid #ef4444;
+        background: linear-gradient(to right, rgba(239, 68, 68, 0.05), transparent);
+      }
       .task__header {
         display: flex;
         justify-content: space-between;
@@ -107,6 +119,11 @@
           <textarea id="description" placeholder="Optional description" rows="3"></textarea>
           <div style="display:flex; gap: 12px; align-items:center;">
             <label><input id="completed" type="checkbox" /> Completed</label>
+            <select id="priority" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #d1d5db;">
+              <option value="low">Low Priority</option>
+              <option value="medium" selected>Medium Priority</option>
+              <option value="high">High Priority</option>
+            </select>
             <button type="submit">Add task</button>
           </div>
         </form>

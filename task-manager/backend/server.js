@@ -8,6 +8,9 @@ const Task = require("./models/Task");
 
 const app = express();
 
+console.log("__dirname:", __dirname);
+console.log("public path:", path.join(__dirname, "public"));
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
@@ -25,18 +28,20 @@ mongoose
 
 // Serve the frontend
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  const filePath = path.join(__dirname, "public", "index.html");
+  console.log("Serving:", filePath);
+  res.send("NEW RESPONSE");
 });
 
 // CRUD routes for tasks
 app.post("/tasks", async (req, res) => {
   try {
-    const { title, description, completed } = req.body;
+    const { title, description, completed, priority } = req.body;
     if (!title || typeof title !== "string") {
       return res.status(400).json({ error: "Title is required and must be a string." });
     }
 
-    const task = await Task.create({ title, description, completed });
+    const task = await Task.create({ title, description, completed, priority });
     return res.status(201).json(task);
   } catch (err) {
     console.error(err);

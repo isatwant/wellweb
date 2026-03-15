@@ -4,6 +4,7 @@ const taskForm = document.getElementById("taskForm");
 const titleInput = document.getElementById("title");
 const descriptionInput = document.getElementById("description");
 const completedInput = document.getElementById("completed");
+const priorityInput = document.getElementById("priority");
 const errorEl = document.getElementById("error");
 const taskList = document.getElementById("taskList");
 
@@ -28,7 +29,7 @@ const safeFetch = async (url, options) => {
 
 const buildTaskElement = (task) => {
   const container = document.createElement("article");
-  container.className = "task";
+  container.className = `task priority-${task.priority || "medium"}`;
 
   const header = document.createElement("div");
   header.className = "task__header";
@@ -115,6 +116,7 @@ const createTask = async (event) => {
       title: titleInput.value.trim(),
       description: descriptionInput.value.trim(),
       completed: completedInput.checked,
+      priority: priorityInput.value,
     };
 
     await safeFetch(`${API_BASE}tasks`, {
@@ -126,6 +128,7 @@ const createTask = async (event) => {
     titleInput.value = "";
     descriptionInput.value = "";
     completedInput.checked = false;
+    priorityInput.value = "medium";
 
     await loadTasks();
   } catch (err) {
