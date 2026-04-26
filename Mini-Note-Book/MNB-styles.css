@@ -22,6 +22,26 @@ body {
     z-index : 0;
 }
 
+.page-left{
+    border: 1px solid black;
+    float:left;
+    height: 500px;
+    width: 350px;
+}
+
+.binding-line{
+    border: 1px solid rgb(161, 19, 19);
+    float:left;
+    height: 500px;
+    width: 30px;
+}
+.page-right{
+    border: 1px solid blue;
+    float:left;
+     height: 500px;
+    width: 350px;
+}
+
 
 /* Heading Style */
 h1 {
