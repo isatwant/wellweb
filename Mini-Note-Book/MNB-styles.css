@@ -1,9 +1,10 @@
 * {
     font-family : 'Courier New', Courier, monospace;
-     box-sizing: border-box; 
+    box-sizing: border-box; 
 }
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height : 100vh;
@@ -14,28 +15,70 @@ p {
     line-height: 1.6;
 }
 .book{
-    display: flex;
-    gap: 10px;
+    position: relative;
     border: 10px solid gray;
     width: 60%; 
     padding:10px;
+    height :80vh;
+    overflow: hidden; 
 }
-.page-left ,
-.page-right  {
-    flex :1;
+.page{
+    position :absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
     padding: 10px;
-    background-color: lightyellow;
-    height : 90vh;
+    background-color: grey;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: translateX(40px);
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+    pointer-events: none;
+}
+
+.page.active{
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+.buttons{
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 15px;
 }
 
 @media (max-width: 600px) {
+    body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        gap: 15px;
+        padding: 10px;
+    }
     .book {
         width: 90%;
-        flex-direction: column; /* stack pages on mobile */
+        height:80vh;
     }
 
-    .page-left,
-    .page-right {
+    .page {
+            min-height: auto;
+    }
+    .previous-button,
+    .next-button{
         width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .buttons{
+        width: 100%;
+        justify-content: center;
+        margin-top: 15px;
     }
 }
