@@ -1,84 +1,74 @@
-* {
-    font-family : 'Courier New', Courier, monospace;
-    box-sizing: border-box; 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Courier New', Courier, monospace;
 }
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height : 100vh;
-    margin: 0;
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    background-color:whitesmoke;
 }
-p {
-    font-size : 1rem;
-    line-height: 1.6;
-}
+
 .book{
-    position: relative;
-    border: 10px solid gray;
-    width: 60%; 
+    width:60%;
+    height:80vh;
     padding:10px;
-    height :80vh;
-    overflow: hidden; 
+    border:10px solid gray;
+    background-color:white;
+    overflow:hidden;
 }
+
 .page{
-    position :absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    padding: 10px;
-    background-color: grey;
-    box-sizing: border-box;
-    opacity: 0;
-    transform: translateX(40px);
-    transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
-    pointer-events: none;
-}
-
-.page.active{
+    width:50%;
+    height:100%;
+    padding:20px;
+    background-color:lightgray;
     opacity: 1;
-    transform: translateX(0);
-    pointer-events: auto;
-}
-.buttons{
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 15px;
+    overflow-y:auto;
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
 }
 
-@media (max-width: 600px) {
+.page.animate{
+    opacity:0;
+    transform:translateX(40px);
+}
+
+p{
+    font-size:1rem;
+    line-height:1.7;
+}
+
+.buttons{
+    display:flex;
+    gap:20px;
+}
+
+button{
+    padding:10px 20px;
+    font-size:1rem;
+    cursor:pointer;
+}
+
+@media (max-width:600px){
+
     body{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        gap: 15px;
-        padding: 10px;
+        padding:10px;
     }
-    .book {
-        width: 90%;
+    .book{
+        width:95%;
         height:80vh;
     }
 
-    .page {
-            min-height: auto;
-    }
-    .previous-button,
-    .next-button{
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
     .buttons{
-        width: 100%;
-        justify-content: center;
-        margin-top: 15px;
+        width:100%;
+        justify-content:center;
     }
 }

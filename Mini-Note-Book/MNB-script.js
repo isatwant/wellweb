@@ -1,35 +1,55 @@
-
+const page = document.getElementById("page");
 const previousButton = document.getElementById("previous");
 const nextButton = document.getElementById("next");
 
-const pages = document.querySelectorAll(".page");
+let bookPages = [];
 
 let currentPageIndex = 0;
 
-pages[currentPageIndex].classList.add("active");
 
-previousButton.addEventListener("click", function () {
+/* FETCH PAGES */
 
-    if (currentPageIndex > 0) {
+async function loadPages() {
+    const response = await fetch("pages.json");
+    bookPages = await response.json();
+    loadPage(currentPageIndex);
+}
 
-        pages[currentPageIndex].classList.remove("active");
 
-        currentPageIndex--;
+/* LOAD PAGE */
 
-        pages[currentPageIndex].classList.add("active");
-    }
+function loadPage(index) {
+    page.classList.add("animate");
+    setTimeout(() => {
+        page.innerHTML = bookPages[index].content;
+    }, 300);
 
-});
+    setTimeout(() => {
+        page.classList.remove("animate");
+    }, 300);
+}
+
+
+/* NEXT BUTTON */
 
 nextButton.addEventListener("click", function () {
-
-    if (currentPageIndex < pages.length - 1) {
-
-        pages[currentPageIndex].classList.remove("active");
-
+    if (currentPageIndex < bookPages.length - 1) {
         currentPageIndex++;
-
-        pages[currentPageIndex].classList.add("active");
+        loadPage(currentPageIndex);
     }
-
 });
+
+
+/* PREVIOUS BUTTON */
+
+previousButton.addEventListener("click", function () {
+    if (currentPageIndex > 0) {
+        currentPageIndex--;
+        loadPage(currentPageIndex);
+    }
+});
+
+
+/* START */
+
+loadPages();
